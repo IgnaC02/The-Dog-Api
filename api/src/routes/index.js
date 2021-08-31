@@ -69,28 +69,12 @@ router.get("/dogs", async (req, res) => {
   }
 });
 
-// // // GET /temperament:
-// router.get("/temperament", async (req, res) => {
-//   const apiUrl = await axios.get(`https://api.thedogapi.com/v1/breeds?api_key=${YOUR_API_KEY}`);
-//   let apiInfo = await apiUrl.data.map((ob) => {
-//     return ob.temperament;
-//   }).toString();
-//   apiInfo = await apiInfo.split(',');
-//   let api_Info =  apiInfo.map((ob) => {
-//     return {name: ob}
-//   })
-//   // console.log(api_Info);
-//   await Temperament.bulkCreate(api_Info);
-//   // console.log("Prieba", apiInfo);
-//   return apiInfo;
-// });
-
 // GET /temperament:
 router.get("/temperament", async (req, res) => {
   const temperamentApi = await axios.get(`https://api.thedogapi.com/v1/breeds?api_key=${YOUR_API_KEY}`);
   let temperaments = temperamentApi.data.map(ob => ob.temperament).toString();
   temperaments = await temperaments.split(',');
-  console.log('Test', temperaments)
+  // console.log('Test', temperaments)
   const tempToDb = temperaments.forEach(ob => {
     Temperament.findOrCreate({
       where: {name : ob}
@@ -99,5 +83,12 @@ router.get("/temperament", async (req, res) => {
   const allTemperaments = await Temperament.findAll();
   res.send(allTemperaments);
 });
+
+// GET /dogs/{idRaza}
+
+
+
+
+
 
 module.exports = router;
