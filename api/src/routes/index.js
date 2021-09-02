@@ -76,7 +76,6 @@ router.get("/temperament", async (req, res) => {
   );
   let temperaments = temperamentApi.data.map((ob) => ob.temperament).toString();
   temperaments = await temperaments.split(",");
-  // console.log('Test', temperaments)
   const tempToDb = temperaments.forEach((ob) => {
     Temperament.findOrCreate({
       where: { name: ob },
@@ -98,27 +97,28 @@ router.get("/dogs/:id", async (req, res) => {
   }
 });
 
-// POST /dog
+// // POST /dog
 router.post("/dog", async (req, res) => {
   // todo esto llega por body
-  let { name, temperaments, weight, height, life_span, image, createdDb } =
-    req.body;
+  let { name, temperaments, weight, height, life_span, image, createdDb } = req.body;
   // no le paso temperament, se lo hago a parte
-  let dogCreated = await Dog.create({
-    name,
-    weight,
-    height,
-    life_span,
-    image,
-    createdDb,
-  });
-  // se la encuentro a los temperament que busque en la base de datos todas las que coincidan con las de body
-  let temperamentDb = await Temperament.findAll({
-    where: { name: temperaments },
-  });
-  // agregado de temperamentos
-  dogCreated.addTemperaments(temperamentDb);
-  res.send("Your dog has been created!");
+  console.log(req.body);
+  try {
+    let dogCreated = await Dog.create({
+      name,
+      weight,
+      height,
+      life_span,
+      image,
+      createdDb,
+    });
+    // se la encuentro a los temperament que busque en la base de datos todas las que coincidan con las de body
+    await dogCreated.setTemperaments(temperaments)
+    // let temperamentDb = await dogCreated.setTemperaments(temperaments)
+    res.send("Your dog has been created!");
+  } catch (error) {
+    console.log(error)
+  }
 });
 
 module.exports = router;
