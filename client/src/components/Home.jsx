@@ -20,24 +20,25 @@ export default function Home() {
 
   return (
     <div>
-      <Link to="/dog">Crear personaje</Link>
+      <Link to="/dog">Create a new dog</Link>
       <h1>THE DOG API</h1>
       <button
         onClick={(e) => {
           handleClick(e);
         }}
       >
-        Volver a cargar todos los personajes
+        Remove all filters
       </button>
       <div>
         <select>
           <option value="default">Order by...</option>
           <option value="asc">A - Z</option>
           <option value="desc">Z - A</option>
-          <option value="menor_mayor">De menor a mayor peso</option>
-          <option value="mayor_menor">De mayor a menor peso</option>
+          <option value="mayor_menor">Weight: from ⬆ to ⬇</option>
+          <option value="menor_mayor">Weight: from ⬇ to ⬆</option>
         </select>
         <select>
+          <option value="default">Show...</option>
           <option value="all">All</option>
           <option value="created">Created</option>
           <option value="api">Reals</option>
