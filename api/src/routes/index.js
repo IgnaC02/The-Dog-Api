@@ -22,10 +22,10 @@ const getApiData = async () => {
     return {
       name: ob.name,
       id: ob.id,
-      img: ob.img,
+      image: ob.image.url,
       temperament: ob.temperament,
-      weight: ob.weight,
-      height: ob.height,
+      weight: ob.weight.metric,
+      height: ob.height.metric,
       life_span: ob.life_span,
     };
   });
