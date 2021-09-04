@@ -1,17 +1,5 @@
 import axios from "axios";
 
-// export function getDogs() {
-//     return function (dispatch) {
-//       return axios
-//         .get("http://localhost:3001/dogs")
-//         .then((dogs) => {
-//           dispatch({
-//             type: "GET_DOGS",
-//             payload: dogs,
-//           });
-//         });
-//     };
-//   }
 
 export function getDogs() {
   return async function (dispatch) {
@@ -23,4 +11,25 @@ export function getDogs() {
       payload: json.data,
     });
   };
+}
+
+export function filterCreated(payload) {
+  return {
+    type: "FILTER_CREATED",
+    payload
+  }
+}
+
+export function orderName(payload) {
+  return {
+    type: "ORDER_BY_NAME",
+    payload
+  }
+}
+
+export function orderWeight(payload) {
+  return {
+    type: "ORDER_BY_WEIGHT",
+    payload
+  }
 }
