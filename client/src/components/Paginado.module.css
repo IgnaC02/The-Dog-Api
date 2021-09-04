@@ -1,0 +1,29 @@
+.paginado {
+  text-decoration: none;
+}
+
+.listContainer {
+  display: inline-block;
+  flex-direction: row;
+}
+
+.number {
+  color: aqua;
+  list-style: none;
+  padding: 10px;
+  font-size: 16px;
+  font-family: Monospace, Arial;
+}
+
+.link {
+  padding: 9px;
+  cursor: pointer;
+  background:none;
+  color: #fff;
+  border: none;
+}
+
+.link:hover {
+  border-radius: 5px;
+  border: solid 0.5px;
+}

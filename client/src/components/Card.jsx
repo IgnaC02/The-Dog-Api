@@ -1,18 +1,18 @@
 import React from "react";
+import styles from "./Card.module.css";
 
 export default function Card({
   name,
   image,
   temperament,
   weight,
-  id
 }) {
   return (
-    <div>
-      <img src={image} alt="Img not found" width="200px" height="200px" />
-      <h2>{name}</h2>
-      <h3>{temperament}</h3>
-      <h3>{weight}</h3>
+    <div className={styles.container}>
+      <img className={styles.img} src={image} alt="Img not found"/>
+      <h2 className={styles.title}>{name}</h2>
+      <h3 className={styles.temp}>{temperament}</h3>
+      <h3 className={styles.wei}>{weight}</h3>
     </div>
   );
 }

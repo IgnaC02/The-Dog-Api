@@ -26,6 +26,10 @@ module.exports = (sequelize) => {
       type: DataTypes.STRING,
       allowNull: true,
     },
+    image: {
+      type: DataTypes.STRING,
+      allowNull: false,
+    },
     createdDb: { 
       // es para facilitar el filtrado por creados o ya existentes
       type: DataTypes.BOOLEAN,
