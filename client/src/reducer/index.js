@@ -1,6 +1,7 @@
 const initalState = {
   dogs: [],
   allDogs: [],
+  temperaments: [],
 };
 
 function rootReducer(state = initalState, action) {
@@ -10,6 +11,12 @@ function rootReducer(state = initalState, action) {
         ...state,
         dogs: action.payload,
         allDogs: action.payload,
+      };
+
+    case "GET_BREED_NAME":
+      return {
+        ...state,
+        dogs: action.payload,
       };
 
     case "FILTER_CREATED":
@@ -48,31 +55,42 @@ function rootReducer(state = initalState, action) {
         ...state,
         dogs: sortedArr,
       };
-    
-      case "ORDER_BY_WEIGHT":
+
+    case "ORDER_BY_WEIGHT":
       let sorted_Arr =
         action.payload === "mayor_menor"
           ? state.dogs.sort(function (a, b) {
-              if (a.weight > b.weight) {
-                return 1;
-              }
-              if (b.weight > a.weight) {
+              if (parseInt(a.weight.split('-')[1]) > parseInt(b.weight.split('-')[1])) {
                 return -1;
+              }
+              if (parseInt(b.weight.split('-')[1]) > parseInt(a.weight.split('-')[1])) {
+                return 1;
               }
               return 0;
             })
           : state.dogs.sort(function (a, b) {
-              if (a.weight > b.weight) {
-                return -1;
-              }
-              if (b.weight > a.weight) {
-                return 1;
-              }
-              return 0;
+            if (parseInt(a.weight.split('-')[0]) > parseInt(b.weight.split('-')[0])) {
+              return 1;
+            }
+            if (parseInt(b.weight.split('-')[0]) > parseInt(a.weight.split('-')[0])) {
+              return -1;
+            }
+            return 0;
             });
       return {
         ...state,
         dogs: sorted_Arr,
+      };
+
+    case "GET_TEMPERAMENTS":
+      return {
+        ...state,
+        temperaments: action.payload,
+      };
+
+    case "POST_DOGS":
+      return {
+        ...state,
       };
 
     default:

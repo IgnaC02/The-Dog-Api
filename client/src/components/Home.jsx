@@ -6,6 +6,7 @@ import { Link } from "react-router-dom";
 import Card from "./Card";
 import Paginado from "./Paginado";
 import styles from "./Home.module.css";
+import SearchBar from "./SearchBar";
 
 export default function Home() {
   const dispatch = useDispatch();
@@ -55,29 +56,34 @@ export default function Home() {
 
   return (
     <div className={styles.container}>
-      <Link to="/dog">Create a new dog breed</Link>
       <h1 className={styles.title}>THE DOG API</h1>
-      <button
-        onClick={(e) => {
-          handleClick(e);
-        }}
-      >
-        Remove all filters
-      </button>
-      <div>
-        <select onChange={(e) => handleSortByName(e)}>
-          <option value="asc">A - Z</option>
-          <option value="desc">Z - A</option>
-        </select>
-        <select onChange={(e) => handleSortByWeight(e)}>
-          <option value="mayor_menor">Weight: from ⬇ to ⬆</option>
-          <option value="menor_mayor">Weight: from ⬆ to ⬇</option>
-        </select>
-        <select onChange={(e) => handleFilterCreated(e)}>
-          <option value="all">Show all...</option>
-          <option value="api">Reals</option>
-          <option value="created">Created</option>
-        </select>
+      <div className={styles.filtersContainer}>
+        <SearchBar />
+        <Link to="/dog" className={styles.link}>Create a new dog breed</Link>
+        <div>
+          <button
+            onClick={(e) => {
+              handleClick(e);
+            }}
+            className={styles.remove}
+          >
+            Remove all filters
+          </button>
+          <select onChange={(e) => handleSortByName(e)} className={styles.selectA_Z}>
+            <option value="asc">A - Z</option>
+            <option value="desc">Z - A</option>
+          </select>
+          <select onChange={(e) => handleSortByWeight(e)} className={styles.selectWei}>
+            <option value="menor_mayor">Weight: from ⬇ to ⬆</option>
+            <option value="mayor_menor">Weight: from ⬆ to ⬇</option>
+          </select>
+          <select onChange={(e) => handleFilterCreated(e)} className={styles.selectFilter}>
+            <option value="all">Show all...</option>
+            <option value="api">Reals</option>
+            <option value="created">Created</option>
+          </select>
+        </div>
+
         <Paginado
           dogsPerPage={dogsPerPage}
           allDogs={allDogs.length}
