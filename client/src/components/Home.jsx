@@ -1,7 +1,7 @@
 import React from "react";
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { getDogs, filterCreated, orderName, orderWeight } from "../actions";
+import { getDogs, filterCreated, orderName, orderWeight, filterByTemp, getTemperaments } from "../actions";
 import { Link } from "react-router-dom";
 import Card from "./Card";
 import Paginado from "./Paginado";
@@ -23,12 +23,16 @@ export default function Home() {
   const indexOfFirstDog = indexOfLastDog - dogsPerPage;
   const currentDogs = allDogs.slice(indexOfFirstDog, indexOfLastDog); // agarra al arreglo de todos los perros, y los divide en n paginas
 
+  const allTemp = useSelector((state) => state.temperaments)
+
+
   const paginado = (pageNumber) => {
     setCurrentPage(pageNumber);
   };
 
   useEffect(() => {
     dispatch(getDogs()); // esto es lo mismo que mapDispatchToProps, pero con hooks
+    dispatch(getTemperaments());
   }, [dispatch]);
 
   function handleClick(e) {
@@ -48,6 +52,11 @@ export default function Home() {
     dispatch(orderWeight(e.target.value));
     setCurrentPage(1);
     setOrderr(`Ordenado ${e.target.value}`);
+  }
+
+  function handleSortByTemp(e) {
+    e.preventDefault();
+    dispatch(filterByTemp(e.target.value))
   }
 
   function handleFilterCreated(e) {
@@ -77,6 +86,12 @@ export default function Home() {
             <option value="menor_mayor">Weight: from ⬇ to ⬆</option>
             <option value="mayor_menor">Weight: from ⬆ to ⬇</option>
           </select>
+          <select onChange={(e) => handleSortByTemp(e)} className={styles.selectTemp}>
+            <option value="">Filter by temperament</option>
+            {allTemp.map((temp) => (
+              <option key={temp.id} value={temp.name}>{temp.name}</option>
+            ))}
+          </select>
           <select onChange={(e) => handleFilterCreated(e)} className={styles.selectFilter}>
             <option value="all">Show all...</option>
             <option value="api">Reals</option>
@@ -94,7 +109,7 @@ export default function Home() {
         {currentDogs?.map((ob) => {
           return (
             <div key={ob.id} className={styles.cards}>
-              <Link to={"/home"} className={styles.card}>
+              <Link to={`/dogs/${ob.id}`} className={styles.card}>
                 <Card
                   name={ob.name}
                   image={ob.image}

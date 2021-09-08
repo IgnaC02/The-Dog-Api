@@ -31,6 +31,13 @@ export function orderWeight(payload) {
   };
 }
 
+export function filterByTemp(payload) {
+  return {
+    type: "FILTER_BY_TEMP",
+    payload,
+  }
+}
+
 export function getBreedName(name) {
   return async function (dispatch) {
     try {
@@ -55,7 +62,20 @@ export function getTemperaments() {
 export function postDogs(payload) {
   return async function (dispatch) {
     const response = await axios.post("http://localhost:3001/dog", payload);
-    console.log(response);
     return response;
+  };
+}
+
+export function getDetail(id) {
+  return async function (dispatch) {
+    try {
+      var json = await axios.get("http://localhost:3001/dogs/" + id);
+      return dispatch({
+        type: "GET_DETAILS",
+        payload: json.data,
+      });
+    } catch (err) {
+      console.error(err);
+    }
   };
 }

@@ -49,6 +49,13 @@ export default function CreateDogs() {
     history.push('/home');
   }
 
+  function handleDelete(ob) {
+    setInput({
+      ...input,
+      temperament: input.temperament.filter(temp => temp !== ob)
+    })
+  }
+
   useEffect(() => {
     dispatch(getTemperaments());
   }, [dispatch]);
@@ -109,15 +116,22 @@ export default function CreateDogs() {
           <label>Temperaments:</label>
           <select onChange={(e) => handleSelect(e)}>
             {temperaments.map((tem) => (
-              <option value={tem.name}>{tem.name}</option>
+              <option key={tem.id} value={tem.name}> {tem.name}</option>
             ))}
           </select>
           <ul>
-            <li >{input.temperament.map((ob) => ob + ",")}</li>
+            <li >{input.temperament.map((ob) => ob + ", ")}</li>
           </ul>
         </div>
         <button type="submit">Create</button>
       </form>
+
+      {input.temperament.map(ob => 
+        <div>
+          <p>{ob}</p>
+          <button onClick={()=> handleDelete(ob)}>X</button>
+        </div>
+        )}
     </div>
   );
 }

@@ -3,6 +3,7 @@ import { BrowserRouter, Route, Switch } from "react-router-dom";
 import LandingPage from "./components/LandingPage";
 import Home from "./components/Home";
 import DogForm from "./components/DogForm";
+import Detail from "./components/Detail";
 
 function App() {
   return (
@@ -12,6 +13,7 @@ function App() {
           <Route exact path="/" component={LandingPage} />
           <Route path="/home" component={Home} />
           <Route path="/dog" component={DogForm} />
+          <Route path="/dogs/:id" component={Detail} />
         </Switch>
       </div>
     </BrowserRouter>

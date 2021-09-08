@@ -32,6 +32,7 @@
   margin-top: 18px;
   font-size: 16px;
   transition-duration: 0.6s;
+  font-family: Microsoft JhengHei UI, sans-serif;
 }
 
 .link:hover {
@@ -54,7 +55,7 @@
   transition-duration: 0.4s;
 }
 
-.selectA_Z:hover{
+.selectA_Z:hover {
   background: rgba(80, 78, 78, 0.699);
 }
 
@@ -74,7 +75,7 @@
   transition-duration: 0.4s;
 }
 
-.selectWei:hover{
+.selectWei:hover {
   background: rgba(80, 78, 78, 0.699);
 }
 
@@ -94,7 +95,27 @@
   transition-duration: 0.4s;
 }
 
-.selectFilter:hover{
+.selectFilter:hover {
+  background: rgba(80, 78, 78, 0.699);
+}
+
+.selectTemp {
+  background: #707070;
+  border: none;
+  font-size: 13px;
+  padding: 7px;
+  width: 175px;
+  color: #fff;
+  margin-top: 15px;
+  margin-left: 14px;
+  margin-right: 14px;
+  border-radius: 9px;
+  font-family: Microsoft JhengHei UI, sans-serif;
+  cursor: pointer;
+  transition-duration: 0.4s;
+}
+
+.selectTemp:hover {
   background: rgba(80, 78, 78, 0.699);
 }
 
@@ -114,7 +135,7 @@
   transition-duration: 0.4s;
 }
 
-.remove:hover{
+.remove:hover {
   background: rgba(80, 78, 78, 0.699);
 }
 

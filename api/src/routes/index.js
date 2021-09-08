@@ -75,7 +75,8 @@ router.get("/temperament", async (req, res) => {
     `https://api.thedogapi.com/v1/breeds?api_key=${YOUR_API_KEY}`
   );
   let temperaments = temperamentApi.data.map((ob) => ob.temperament).toString();
-  temperaments = await temperaments.split(",");
+  const regularExpression = /\s*,\s*/;
+  temperaments = await temperaments.split(regularExpression);
   const tempToDb = temperaments.forEach((ob) => {
     Temperament.findOrCreate({
       where: { name: ob },
