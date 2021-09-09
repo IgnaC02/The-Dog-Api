@@ -97,11 +97,9 @@ function rootReducer(state = initalState, action) {
 
     case "FILTER_BY_TEMP":
       const allDogs = state.allDogs;
-      const regularExpression = /\s*,\s*/;
       const filteredDogs = allDogs.filter((ob) =>
-        ob.temperament?.split(regularExpression).includes(action.payload)
+        ob.temperament?.includes(action.payload)
       );
-      console.log(filteredDogs);
       return {
         ...state,
         dogs: filteredDogs,

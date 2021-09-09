@@ -6,13 +6,12 @@ import { getDetail } from "../actions";
 import styles from "./Detail.module.css";
 
 export default function Detail(props){
-    console.log(props)
     const dispatch = useDispatch();
     
     
     useEffect(() => {
         dispatch(getDetail(props.match.params.id));
-    }, [dispatch])
+    }, [dispatch, props.match.params.id])
 
     const myDog = useSelector((state) => state.detail)
 
@@ -23,9 +22,10 @@ export default function Detail(props){
                 <div className={styles.container}>
                     <img src={myDog[0].image} alt="Img not found" className={styles.img}/>
                     <h1>{myDog[0].name}</h1>
-                    <h3> Weight: {myDog[0].weight} </h3>
-                    <h3> Height: {myDog[0].height} </h3>
-                    <h3> Life span: {myDog[0].life_span} </h3>
+                    <h3> Weight: {myDog[0].weight} Kg</h3>
+                    <h3> Height: {myDog[0].height} Cm</h3>
+                    {/* <h3> Life span: {myDog[0].life_span} Years</h3> */}
+                    <h3> Life span: {myDog[0].createdDb ? myDog[0].life_span + " years" : myDog[0].life_span} </h3>
                     <h3> Temperaments: {!myDog[0].createdDb? myDog[0].temperament + ' ' : myDog[0].temperaments.map(ob => ob.name + (' '))} </h3>
                     <Link to="/home">
                         <button>Go back</button>

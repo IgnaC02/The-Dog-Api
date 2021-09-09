@@ -71,13 +71,17 @@ router.get("/dogs", async (req, res) => {
 
 // GET /temperament:
 router.get("/temperament", async (req, res) => {
-  const temperamentApi = await axios.get(
+  const temperamentApi = (await axios.get(
     `https://api.thedogapi.com/v1/breeds?api_key=${YOUR_API_KEY}`
-  );
-  let temperaments = temperamentApi.data.map((ob) => ob.temperament).toString();
-  const regularExpression = /\s*,\s*/;
-  temperaments = await temperaments.split(regularExpression);
-  const tempToDb = temperaments.forEach((ob) => {
+  )).data
+  
+  let temperaments = temperamentApi.map((ob) => ob.temperament);
+  temperaments = temperaments.join().split(",");
+  temperaments = temperaments.filter (ob => ob)
+  
+  temperaments = [...new Set (temperaments)].sort();
+
+  temperaments.forEach((ob) => {
     Temperament.findOrCreate({
       where: { name: ob },
     });
@@ -101,7 +105,7 @@ router.get("/dogs/:id", async (req, res) => {
 // // POST /dog
 router.post("/dog", async (req, res) => {
   // todo esto llega por body
-  let { name, temperaments, weight, height, life_span, image, createdDb } = req.body;
+  let { name, temperament, weight, height, life_span, image, createdDb } = req.body;
   // no le paso temperament, se lo hago a parte
   console.log(req.body);
   try {
@@ -114,7 +118,7 @@ router.post("/dog", async (req, res) => {
       createdDb,
     });
     // se la encuentro a los temperament que busque en la base de datos todas las que coincidan con las de body
-    await dogCreated.setTemperaments(temperaments)
+    await dogCreated.setTemperaments(temperament)
     // let temperamentDb = await dogCreated.setTemperaments(temperaments)
     res.send("Your dog has been created!");
   } catch (error) {
