@@ -1,8 +1,8 @@
-.container {
+.general {
     background-image: url("../img/bg.png");
-    /* display: flex; */
-    /* flex-direction: column;
-    justify-content: center; */
+    display: flex;
+    /* flex-direction: column; */
+    align-items: center;
     margin: 0px;
     padding: 0px;
     width: 100%;
@@ -13,7 +13,59 @@
     color: #fff;
 }
 
+.container{
+    display:flex;
+    flex-direction: column;
+    width: fit-content;
+    height: fit-content;
+    background-color: #707070;
+    border-radius: 15px;
+    padding:15px 30px 10px 30px;
+    margin-left:auto;
+    margin-right:auto;
+    font-family: Microsoft JhengHei UI, sans-serif;
+}
+
+.title{
+    font-family: "Century Gothic", CenturyGothic, Geneva, AppleGothic, sans-serif;
+    font-size: 45px;
+}
+
 .img{
+    margin-left: auto;
+    margin-right:auto;
     width: 300px;
     height: 300px;
+    border-radius: 15px;
+}
+
+
+
+.btn{
+    border-radius: 10px;
+    padding: 10px;
+    width: fit-content;
+    border: none;
+    font-family: Microsoft JhengHei UI, sans-serif;
+    background: #fff;
+    cursor: pointer;
+    transition-duration: 0.4s;
+    font-weight: lighter;
+    font-size: 16px;
+}
+
+.btn:hover{
+      background: rgba(80, 78, 78, 0.699);
+      color: #fff;
+      font-weight: bolder;
+  }
+
+.loading{
+    margin-left: auto;
+    margin-right: auto;
+    width: 350px;
+}
+  
+.hr{
+    width: 100%;
 }
