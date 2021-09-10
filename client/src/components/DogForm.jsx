@@ -31,12 +31,16 @@ export default function CreateDogs() {
   const [errors, setErrors] = useState({});
   const [input, setInput] = useState({
     name: "",
-    weight: "",
-    height: "",
-    life_span: "",
+    wMin: "",
+    wMax: "",
+    hMin: "",
+    hMax: "",
+    life_spanMin: "",
+    life_spanMax: "",
     image: "",
     temperament: [],
   });
+
   function handleChange(e) {
     setInput({
       ...input,
@@ -58,15 +62,25 @@ export default function CreateDogs() {
   }
 
   function handleSubmit(e) {
+    const formCompleto = {
+      name: input.name,
+      weight: input.wMin + " - " + input.wMax,
+      height: input.hMin + " - " + input.hMax,
+      life_span: input.life_spanMin + " - " + input.life_spanMax,
+      image: input.image,
+      temperament: input.temperament,
+    };
     e.preventDefault();
-    console.log(input);
-    dispatch(postDogs(input));
-    alert("Your breed has been created successfully");
+    dispatch(postDogs(formCompleto));
+    alert("Your dog has been created successfully");
     setInput({
       name: "",
-      weight: "",
-      height: "",
-      life_span: "",
+      wMin: "",
+      wMax: "",
+      hMin: "",
+      hMax: "",
+      life_spanMin: "",
+      life_spanMax: "",
       image: "",
       temperament: [],
     });
@@ -93,6 +107,7 @@ export default function CreateDogs() {
       </Link>
       <h1 className={styles.title}>Create your breed</h1>
       <form onSubmit={(e) => handleSubmit(e)} className={styles.form}>
+        {/* ----------- NAME ----------- */}
         <div>
           {/* <label>Name:</label> */}
           <input
@@ -104,34 +119,58 @@ export default function CreateDogs() {
           />
           {errors.name && <p>{errors.name}</p>}
         </div>
+        {/* ----------- WEIGTH ----------- */}
         <div>
           {/* <label>Weight:</label> */}
           <input
-            type="text"
-            value={input.weight}
-            name="weight"
+            type="number"
+            value={input.wMin}
+            name="wMin"
+            onChange={(e) => handleChange(e)}
+            placeholder="Weight...e.g 20 - 25"
+          />
+          <input
+            type="number"
+            value={input.wMax}
+            name="wMax"
             onChange={(e) => handleChange(e)}
             placeholder="Weight...e.g 20 - 25"
           />
           {errors.weight && <p>{errors.weight}</p>}
         </div>
+        {/* ----------- HEIGHT ----------- */}
         <div>
           {/* <label>Height:</label> */}
           <input
-            type="text"
-            value={input.height}
-            name="height"
+            type="number"
+            value={input.hMin}
+            name="hMin"
+            onChange={(e) => handleChange(e)}
+            placeholder="Height...e.g 20 - 25"
+          />
+          <input
+            type="number"
+            value={input.hMax}
+            name="hMax"
             onChange={(e) => handleChange(e)}
             placeholder="Height...e.g 20 - 25"
           />
           {errors.height && <p>{errors.height}</p>}
         </div>
+        {/* ----------- LIFE_SPAN ----------- */}
         <div>
           {/* <label>Life span:</label> */}
           <input
-            type="text"
-            value={input.life_span}
-            name="life_span"
+            type="number"
+            value={input.life_spanMin}
+            name="life_spanMin"
+            onChange={(e) => handleChange(e)}
+            placeholder="Life span...e.g 20 - 25"
+          />
+          <input
+            type="number"
+            value={input.life_spanMax}
+            name="life_spanMax"
             onChange={(e) => handleChange(e)}
             placeholder="Life span...e.g 20 - 25"
           />
@@ -150,7 +189,7 @@ export default function CreateDogs() {
         </div>
         <div>
           {/* <label>Temperaments:</label> */}
-          <p>Select at least one temperament</p>  
+          <p>Select at least one temperament</p>
           <select onChange={(e) => handleSelect(e)}>
             {temperaments.map((ob) => (
               <option key={ob.id} value={ob.id}>
@@ -164,7 +203,7 @@ export default function CreateDogs() {
         </div>
         <button type="submit">Create</button>
       </form>
-             
+
       {input.temperament.map((ob) => (
         <div key={index++} className={styles.delete}>
           <p>{ob}</p>
