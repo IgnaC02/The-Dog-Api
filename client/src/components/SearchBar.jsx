@@ -16,7 +16,7 @@ export default function SearchBar() {
     function handleSubmit(e) {
         e.preventDefault();   
         dispatch(getBreedName(name));
-        setName("")
+        setName(" ")
     }
 
     return (
@@ -25,6 +25,5 @@ export default function SearchBar() {
             <button type="submit" onClick={(e) => handleSubmit(e)} className={styles.button} > Search</button>
         </div>
     )
-
 }
 
