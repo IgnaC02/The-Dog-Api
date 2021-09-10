@@ -1,5 +1,6 @@
 .container {
-    background-image: url("../img/bg.png");
+    /* background-image: url("../img/bg.png"); */
+    background-color: black;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -18,4 +19,8 @@
 
 .form{
     color: #fff
+}
+
+.delete{
+    color: #fff;
 }

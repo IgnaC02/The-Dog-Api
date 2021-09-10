@@ -77,6 +77,7 @@ router.get("/temperament", async (req, res) => {
   
   let temperaments = temperamentApi.map((ob) => ob.temperament);
   temperaments = temperaments.join().split(",");
+  
   temperaments = temperaments.filter (ob => ob)
   
   temperaments = [...new Set (temperaments)].sort();

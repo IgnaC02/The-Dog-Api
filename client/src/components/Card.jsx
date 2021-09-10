@@ -13,7 +13,7 @@ export default function Card({ name, image, temperament, weight }) {
           }
           if (Array.isArray(temperament)) {
             let temp = temperament.map((ob) => ob.name);
-            return temp;
+            return temp.join(", ");
           }
         })(temperament)}
       </h3>

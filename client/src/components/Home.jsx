@@ -113,7 +113,7 @@ export default function Home() {
                 <Card
                   name={ob.name}
                   image={ob.image}
-                  temperament={ob.temperament}
+                  temperament={!ob.createdDb? ob.temperament + ' ' : ob.temperaments}
                   weight={ob.weight + " kg"}
                 />
               </Link>

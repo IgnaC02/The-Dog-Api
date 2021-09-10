@@ -37,7 +37,6 @@ export default function CreateDogs() {
     image: "",
     temperament: [],
   });
-
   function handleChange(e) {
     setInput({
       ...input,
@@ -84,6 +83,8 @@ export default function CreateDogs() {
   useEffect(() => {
     dispatch(getTemperaments());
   }, [dispatch]);
+
+  var index = 0;
 
   return (
     <div className={styles.container}>
@@ -149,7 +150,7 @@ export default function CreateDogs() {
         </div>
         <div>
           {/* <label>Temperaments:</label> */}
-          <p>Select at least one temperament</p>
+          <p>Select at least one temperament</p>  
           <select onChange={(e) => handleSelect(e)}>
             {temperaments.map((ob) => (
               <option key={ob.id} value={ob.id}>
@@ -163,9 +164,9 @@ export default function CreateDogs() {
         </div>
         <button type="submit">Create</button>
       </form>
-
+             
       {input.temperament.map((ob) => (
-        <div>
+        <div key={index++} className={styles.delete}>
           <p>{ob}</p>
           <button onClick={() => handleDelete(ob)}>X</button>
         </div>

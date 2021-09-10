@@ -60,36 +60,20 @@ function rootReducer(state = initalState, action) {
     case "ORDER_BY_WEIGHT":
       let sorted_Arr =
         action.payload === "mayor_menor"
-          ? state.dogs.sort(function (a, b) {
-              if (
-                parseInt(a.weight.split("-")[1]) >
-                parseInt(b.weight.split("-")[1])
-              ) {
-                return -1;
+        ? state.dogs.sort(function (a, b) {
+              let grande = parseInt(a.weight.replace('-','').substr(0,2))
+              let chico = parseInt(b.weight.replace('-','').substr(0,2))
+              if (grande > chico) {
+                  return -1;
               }
-              if (
-                parseInt(b.weight.split("-")[1]) >
-                parseInt(a.weight.split("-")[1])
-              ) {
-                return 1;
+              if (grande < chico) {
+                  return 1;
               }
               return 0;
-            })
+          })
           : state.dogs.sort(function (a, b) {
-              if (
-                parseInt(a.weight.split("-")[0]) >
-                parseInt(b.weight.split("-")[0])
-              ) {
-                return 1;
-              }
-              if (
-                parseInt(b.weight.split("-")[0]) >
-                parseInt(a.weight.split("-")[0])
-              ) {
-                return -1;
-              }
-              return 0;
-            });
+              return parseInt(a.weight.replace('-','').substr(0,2)) - parseInt(b.weight.replace('-','').substr(0,2))
+          });
       return {
         ...state,
         dogs: sorted_Arr,
