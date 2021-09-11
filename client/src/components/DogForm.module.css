@@ -167,6 +167,7 @@ font-size: 45px;
   border-top-right-radius: 12px;
   border-bottom-left-radius: 12px;
   font-size: 16px;
+  cursor: pointer;
 }
 
 .img {
@@ -245,3 +246,4 @@ margin-left: auto;
   font-style: italic;
   font-size: 17px;
 }
+

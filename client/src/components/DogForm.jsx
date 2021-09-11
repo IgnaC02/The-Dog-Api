@@ -8,20 +8,34 @@ import styles from "./DogForm.module.css";
 
 function validate(input) {
   let errors = {};
+  console.log(errors)
   if (!input.name) {
     errors.name = "Name is required";
-  } else if (!input.weight) {
-    errors.weight = "Weight is required and should be a number (min - max)";
-  } else if (!input.height) {
-    errors.height = "Height is required and should be a number (min - max)";
-  } else if (!input.life_span) {
-    errors.life_span =
-      "Life span is required and should be a number (min - max)";
+  } else if (!input.wMin) {
+    errors.wMin = "Min weight is required";
+  } else if (!input.wMax) {
+    errors.wMax = "Max weight is required";
+  } else if (parseInt(input.wMin) >= parseInt(input.wMax)) {
+    errors.wMax = "Max weight must be greater than Min";
+  } else if (!input.hMin) {
+    errors.hMin = "Min height is required";
+  } else if (!input.hMax) {
+    errors.hMax = "Max height is required";
+  } else if (parseInt(input.hMin) >= parseInt(input.hMax)) {
+    errors.wMax = "Max height must be greater than Min";
+  } else if (!input.life_spanMin) {
+    errors.life_spanMin = "Min life span is required";
+  } else if (!input.life_spanMax) {
+    errors.life_spanMin = "Max life span is required";
+  } else if (parseInt(input.life_spanMin) >= parseInt(input.life_spanMax)) {
+    errors.wMax = "Max life span must be greater than Min";
   } else if (!input.image) {
-    errors.image = "Please insert a valid internet image URL";
+    errors.image = "Please insert internet image URL";
+  } else if (!/(http(s?):)([/|.|\w|\s|-])*\.(?:jpg|gif|png)/.test(input.image)) {
+    errors.image = "Please insert a valid image URL";
   }
 
-  return errors;
+ return errors;
 }
 
 export default function CreateDogs() {
@@ -85,6 +99,7 @@ export default function CreateDogs() {
       temperament: [],
     });
     history.push("/home");
+
   }
 
   function handleDelete(ob) {
@@ -115,6 +130,7 @@ export default function CreateDogs() {
               onChange={(e) => handleChange(e)}
               placeholder="Name..."
               className={styles.name}
+              required
             />
             {errors.name && <p>{errors.name}</p>}
           </div>
@@ -126,18 +142,21 @@ export default function CreateDogs() {
               value={input.wMin}
               name="wMin"
               onChange={(e) => handleChange(e)}
-              placeholder="Min weight..."
+              placeholder="Min weight (Kg)"
               className={styles.wMin}
+              required
             />
+            {errors.wMin && <p>{errors.wMin}</p>}
             <input
               type="number"
               value={input.wMax}
               name="wMax"
               onChange={(e) => handleChange(e)}
-              placeholder="Max weight..."
+              placeholder="Max weight (Kg)"
               className={styles.wMax}
+              required
             />
-            {errors.weight && <p>{errors.weight}</p>}
+            {errors.wMax && <p>{errors.wMax}</p>}
           </div>
           {/* ----------- HEIGHT ----------- */}
           <div>
@@ -147,18 +166,21 @@ export default function CreateDogs() {
               value={input.hMin}
               name="hMin"
               onChange={(e) => handleChange(e)}
-              placeholder="Min height..."
+              placeholder="Min height (Cm)"
               className={styles.hMax}
+              required
             />
+            {errors.hMin && <p>{errors.hMin}</p>}
             <input
               type="number"
               value={input.hMax}
               name="hMax"
               onChange={(e) => handleChange(e)}
-              placeholder="Max height..."
+              placeholder="Max height (Cm)"
               className={styles.hMax}
+              required
             />
-            {errors.height && <p>{errors.height}</p>}
+            {errors.hMax && <p>{errors.hMax}</p>}
           </div>
           {/* ----------- LIFE_SPAN ----------- */}
           <div>
@@ -168,18 +190,21 @@ export default function CreateDogs() {
               value={input.life_spanMin}
               name="life_spanMin"
               onChange={(e) => handleChange(e)}
-              placeholder="Min life span..."
+              placeholder="Min life span"
               className={styles.lsMin}
+              required
             />
+            {errors.life_spanMin && <p>{errors.life_spanMin}</p>}
             <input
               type="number"
               value={input.life_spanMax}
               name="life_spanMax"
               onChange={(e) => handleChange(e)}
-              placeholder="Max life span..."
+              placeholder="Max life span"
               className={styles.lsMax}
+              required
             />
-            {errors.life_span && <p>{errors.life_span}</p>}
+            {errors.life_spanMax && <p>{errors.life_spanMax}</p>}
           </div>
           <div>
             {/* <label>Image:</label> */}
@@ -190,6 +215,7 @@ export default function CreateDogs() {
               onChange={(e) => handleChange(e)}
               placeholder="Image url..."
               className={styles.image}
+              required
             />
             {errors.image && <p>{errors.image}</p>}
           </div>
@@ -223,9 +249,9 @@ export default function CreateDogs() {
 
         <img className={styles.img} src={doge} alt="Landing img not found" />
       </div>
-        <Link to="/home" className={styles.btn_container}>
-          <button className={styles.back_btn}> Go home</button>
-        </Link>
+      <Link to="/home" className={styles.btn_container}>
+        <button className={styles.back_btn}> Go home</button>
+      </Link>
     </div>
   );
 }
