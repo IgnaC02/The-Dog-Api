@@ -8,7 +8,7 @@ import styles from "./DogForm.module.css";
 
 function validate(input) {
   let errors = {};
-  console.log(errors)
+  console.log(errors);
   if (!input.name) {
     errors.name = "Name is required";
   } else if (!input.wMin) {
@@ -31,11 +31,13 @@ function validate(input) {
     errors.wMax = "Max life span must be greater than Min";
   } else if (!input.image) {
     errors.image = "Please insert internet image URL";
-  } else if (!/(http(s?):)([/|.|\w|\s|-])*\.(?:jpg|gif|png)/.test(input.image)) {
+  } else if (
+    !/(http(s?):)([/|.|\w|\s|-])*\.(?:jpg|gif|png)/.test(input.image)
+  ) {
     errors.image = "Please insert a valid image URL";
   }
 
- return errors;
+  return errors;
 }
 
 export default function CreateDogs() {
@@ -71,7 +73,7 @@ export default function CreateDogs() {
   function handleSelect(e) {
     setInput({
       ...input,
-      temperament: [...input.temperament, e.target.value],
+      temperament: [...input.temperament, +e.target.value],
     });
   }
 
@@ -99,21 +101,12 @@ export default function CreateDogs() {
       temperament: [],
     });
     history.push("/home");
-
-  }
-
-  function handleDelete(ob) {
-    setInput({
-      ...input,
-      temperament: input.temperament.filter((temp) => temp !== ob),
-    });
   }
 
   useEffect(() => {
     dispatch(getTemperaments());
   }, [dispatch]);
 
-  var index = 0;
 
   return (
     <div className={styles.container}>
@@ -132,7 +125,7 @@ export default function CreateDogs() {
               className={styles.name}
               required
             />
-            {errors.name && <p>{errors.name}</p>}
+            {errors.name && <p className={styles.nameP}>{errors.name}</p>}
           </div>
           {/* ----------- WEIGTH ----------- */}
           <div>
@@ -146,7 +139,6 @@ export default function CreateDogs() {
               className={styles.wMin}
               required
             />
-            {errors.wMin && <p>{errors.wMin}</p>}
             <input
               type="number"
               value={input.wMax}
@@ -155,8 +147,9 @@ export default function CreateDogs() {
               placeholder="Max weight (Kg)"
               className={styles.wMax}
               required
-            />
-            {errors.wMax && <p>{errors.wMax}</p>}
+              />
+            {errors.wMin && <p className={styles.wMinP}>{errors.wMin}</p>}
+            {errors.wMax && <p className={styles.wMaxP}>{errors.wMax}</p>}
           </div>
           {/* ----------- HEIGHT ----------- */}
           <div>
@@ -170,7 +163,6 @@ export default function CreateDogs() {
               className={styles.hMax}
               required
             />
-            {errors.hMin && <p>{errors.hMin}</p>}
             <input
               type="number"
               value={input.hMax}
@@ -179,8 +171,9 @@ export default function CreateDogs() {
               placeholder="Max height (Cm)"
               className={styles.hMax}
               required
-            />
-            {errors.hMax && <p>{errors.hMax}</p>}
+              />
+            {errors.hMin && <p className={styles.hMinP}>{errors.hMin}</p>}
+            {errors.hMax && <p className={styles.hMaxP}>{errors.hMax}</p>}
           </div>
           {/* ----------- LIFE_SPAN ----------- */}
           <div>
@@ -194,7 +187,6 @@ export default function CreateDogs() {
               className={styles.lsMin}
               required
             />
-            {errors.life_spanMin && <p>{errors.life_spanMin}</p>}
             <input
               type="number"
               value={input.life_spanMax}
@@ -203,8 +195,9 @@ export default function CreateDogs() {
               placeholder="Max life span"
               className={styles.lsMax}
               required
-            />
-            {errors.life_spanMax && <p>{errors.life_spanMax}</p>}
+              />
+            {errors.life_spanMin && <p className={styles.life_spanMinP}>{errors.life_spanMin}</p>}
+            {errors.life_spanMax && <p className={styles.life_spanMaxP}>{errors.life_spanMax}</p>}
           </div>
           <div>
             {/* <label>Image:</label> */}
@@ -217,35 +210,35 @@ export default function CreateDogs() {
               className={styles.image}
               required
             />
-            {errors.image && <p>{errors.image}</p>}
+            {errors.image && <p className={styles.imageP}>{errors.image}</p>}
           </div>
           <div>
-            {/* <label>Temperaments:</label> */}
-            {/* <p>Select at least one temperament</p> */}
-            <select onChange={(e) => handleSelect(e)} className={styles.select}>
-              {temperaments.map((ob) => (
-                <option key={ob.id} value={ob.id}>
-                  {ob.name}
+            <select
+              onChange={(e) => handleSelect(e)}
+              value={input.temperament[input.temperament.length - 1]}
+              className={styles.select}
+              required
+            >
+              <option value="">Temperaments:</option>
+              {temperaments.map((e) => (
+                <option key={e.id} value={e.id}>
+                  {e.name}
                 </option>
               ))}
+              
             </select>
+            <div>
+              {[
+                input.temperament.map(
+                  (i) => temperaments.find((ob) => ob.id === i)?.name + ", "
+                ),
+              ]}
+            </div>
           </div>
-          {/* <ul>
-              <li className={styles.list}>{input.temperament.map((ob) => ob + ", ")}</li>
-            </ul> */}
           <div className={styles.btns}>
-            <button type="submit" className={styles.submit_btn}>
-              Create
-            </button>
+            <button type="submit" className={styles.submit_btn}>Create</button>
           </div>
         </form>
-
-        {input.temperament.map((ob) => (
-          <div key={index++} className={styles.delete}>
-            <p>{ob}</p>
-            <button onClick={() => handleDelete(ob)}>X</button>
-          </div>
-        ))}
 
         <img className={styles.img} src={doge} alt="Landing img not found" />
       </div>

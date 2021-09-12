@@ -247,3 +247,15 @@ margin-left: auto;
   font-size: 17px;
 }
 
+.nameP, .wMinP, .wMaxP, .hMinP, .hMaxP, .life_spanMinP, .life_spanMaxP, .imageP {
+  color: #fff;
+  background-color: rgba(202, 41, 41, 0.719);
+  padding:3px;
+  width: fit-content;
+  margin-top: 5px;
+  margin-bottom: 5px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+
