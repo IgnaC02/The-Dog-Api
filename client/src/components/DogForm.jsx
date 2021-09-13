@@ -78,6 +78,10 @@ export default function CreateDogs() {
   }
 
   function handleSubmit(e) {
+    if (errors.name === undefined) {
+      document.getElementById("NoSubmit");
+      return alert("Please complete the fields with valid data");
+    }
     const formCompleto = {
       name: input.name,
       weight: input.wMin + " - " + input.wMax,
@@ -107,12 +111,15 @@ export default function CreateDogs() {
     dispatch(getTemperaments());
   }, [dispatch]);
 
-
   return (
     <div className={styles.container}>
       <h1 className={styles.title}>Create your breed!</h1>
       <div className={styles.oo}>
-        <form onSubmit={(e) => handleSubmit(e)} className={styles.form}>
+        <form
+          id="NoSubmit"
+          onSubmit={(e) => handleSubmit(e)}
+          className={styles.form}
+        >
           {/* ----------- NAME ----------- */}
           <div>
             {/* <label>Name:</label> */}
@@ -123,7 +130,6 @@ export default function CreateDogs() {
               onChange={(e) => handleChange(e)}
               placeholder="Name..."
               className={styles.name}
-              required
             />
             {errors.name && <p className={styles.nameP}>{errors.name}</p>}
           </div>
@@ -137,7 +143,6 @@ export default function CreateDogs() {
               onChange={(e) => handleChange(e)}
               placeholder="Min weight (Kg)"
               className={styles.wMin}
-              required
             />
             <input
               type="number"
@@ -146,8 +151,7 @@ export default function CreateDogs() {
               onChange={(e) => handleChange(e)}
               placeholder="Max weight (Kg)"
               className={styles.wMax}
-              required
-              />
+            />
             {errors.wMin && <p className={styles.wMinP}>{errors.wMin}</p>}
             {errors.wMax && <p className={styles.wMaxP}>{errors.wMax}</p>}
           </div>
@@ -161,7 +165,6 @@ export default function CreateDogs() {
               onChange={(e) => handleChange(e)}
               placeholder="Min height (Cm)"
               className={styles.hMax}
-              required
             />
             <input
               type="number"
@@ -170,8 +173,7 @@ export default function CreateDogs() {
               onChange={(e) => handleChange(e)}
               placeholder="Max height (Cm)"
               className={styles.hMax}
-              required
-              />
+            />
             {errors.hMin && <p className={styles.hMinP}>{errors.hMin}</p>}
             {errors.hMax && <p className={styles.hMaxP}>{errors.hMax}</p>}
           </div>
@@ -185,7 +187,6 @@ export default function CreateDogs() {
               onChange={(e) => handleChange(e)}
               placeholder="Min life span"
               className={styles.lsMin}
-              required
             />
             <input
               type="number"
@@ -194,10 +195,13 @@ export default function CreateDogs() {
               onChange={(e) => handleChange(e)}
               placeholder="Max life span"
               className={styles.lsMax}
-              required
-              />
-            {errors.life_spanMin && <p className={styles.life_spanMinP}>{errors.life_spanMin}</p>}
-            {errors.life_spanMax && <p className={styles.life_spanMaxP}>{errors.life_spanMax}</p>}
+            />
+            {errors.life_spanMin && (
+              <p className={styles.life_spanMinP}>{errors.life_spanMin}</p>
+            )}
+            {errors.life_spanMax && (
+              <p className={styles.life_spanMaxP}>{errors.life_spanMax}</p>
+            )}
           </div>
           <div>
             {/* <label>Image:</label> */}
@@ -208,7 +212,6 @@ export default function CreateDogs() {
               onChange={(e) => handleChange(e)}
               placeholder="Image url..."
               className={styles.image}
-              required
             />
             {errors.image && <p className={styles.imageP}>{errors.image}</p>}
           </div>
@@ -217,7 +220,6 @@ export default function CreateDogs() {
               onChange={(e) => handleSelect(e)}
               value={input.temperament[input.temperament.length - 1]}
               className={styles.select}
-              required
             >
               <option value="">Temperaments:</option>
               {temperaments.map((e) => (
@@ -225,7 +227,6 @@ export default function CreateDogs() {
                   {e.name}
                 </option>
               ))}
-              
             </select>
             <div>
               {[
@@ -236,7 +237,9 @@ export default function CreateDogs() {
             </div>
           </div>
           <div className={styles.btns}>
-            <button type="submit" className={styles.submit_btn}>Create</button>
+            <button type="submit" className={styles.submit_btn}>
+              Create
+            </button>
           </div>
         </form>
 
