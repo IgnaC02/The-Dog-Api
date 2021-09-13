@@ -77,8 +77,15 @@ export default function CreateDogs() {
     });
   }
 
+  function handleDelete(e) {
+    setInput({
+      ...input,
+      temperament: input.temperament.filter(ob => ob !== e)
+    })
+  }
+
   function handleSubmit(e) {
-    if (errors.name === undefined) {
+    if (errors.name !== undefined) {
       document.getElementById("NoSubmit");
       return alert("Please complete the fields with valid data");
     }
@@ -220,6 +227,7 @@ export default function CreateDogs() {
               onChange={(e) => handleSelect(e)}
               value={input.temperament[input.temperament.length - 1]}
               className={styles.select}
+              required
             >
               <option value="">Temperaments:</option>
               {temperaments.map((e) => (
@@ -234,6 +242,9 @@ export default function CreateDogs() {
                   (i) => temperaments.find((ob) => ob.id === i)?.name + ", "
                 ),
               ]}
+            </div>
+            <div className={styles.delete}>
+              {[input.temperament.map(ob => <div className={styles.options} ><p key={ob.id} className={styles.temperamentt}> {temperaments.find((t) => t.id === ob)?.name}</p> <button onClick={() => handleDelete(ob)} className={styles.btnX}>X</button></div>)]}
             </div>
           </div>
           <div className={styles.btns}>
