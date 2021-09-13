@@ -105,9 +105,7 @@ router.get("/dogs/:id", async (req, res) => {
 
 // // POST /dog
 router.post("/dog", async (req, res) => {
-  // todo esto llega por body
   let { name, temperament, weight, height, life_span, image, createdDb } = req.body;
-  // no le paso temperament, se lo hago a parte
   console.log(req.body);
   try {
     let dogCreated = await Dog.create({
@@ -118,7 +116,6 @@ router.post("/dog", async (req, res) => {
       image,
       createdDb,
     });
-    // se la encuentro a los temperament que busque en la base de datos todas las que coincidan con las de body
     await dogCreated.setTemperaments(temperament)
     // let temperamentDb = await dogCreated.setTemperaments(temperaments)
     res.send("Your dog has been created!");

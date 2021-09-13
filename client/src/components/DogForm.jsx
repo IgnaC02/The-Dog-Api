@@ -243,9 +243,9 @@ export default function CreateDogs() {
                 ),
               ]}
             </div>
-            <div className={styles.delete}>
+            {/* <div className={styles.delete}>
               {[input.temperament.map(ob => <div className={styles.options} ><p key={ob.id} className={styles.temperamentt}> {temperaments.find((t) => t.id === ob)?.name}</p> <button onClick={() => handleDelete(ob)} className={styles.btnX}>X</button></div>)]}
-            </div>
+            </div> */}
           </div>
           <div className={styles.btns}>
             <button type="submit" className={styles.submit_btn}>
