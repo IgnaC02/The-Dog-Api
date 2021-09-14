@@ -59,7 +59,7 @@ router.get("/dogs", async (req, res) => {
   let dogsTotal = await getAllData();
   if (name) {
     let dogName = await dogsTotal.filter(
-      (ob) => ob.name.toLowerCase().includes(name.toLowerCase()) // includes porque así trae a todo lo que lo incluya al name
+      (ob) => ob.name.toLowerCase().includes(name.toLowerCase()) 
     );
     dogName.length
       ? res.status(200).send(dogName)
@@ -106,7 +106,6 @@ router.get("/dogs/:id", async (req, res) => {
 // // POST /dog
 router.post("/dog", async (req, res) => {
   let { name, temperament, weight, height, life_span, image, createdDb } = req.body;
-  console.log(req.body);
   try {
     let dogCreated = await Dog.create({
       name,
@@ -117,7 +116,6 @@ router.post("/dog", async (req, res) => {
       createdDb,
     });
     await dogCreated.setTemperaments(temperament)
-    // let temperamentDb = await dogCreated.setTemperaments(temperaments)
     res.send("Your dog has been created!");
   } catch (error) {
     console.log(error)
