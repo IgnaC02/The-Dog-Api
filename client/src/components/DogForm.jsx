@@ -12,30 +12,39 @@ function validate(input) {
     errors.name = "Name is required";
   } else if (!input.wMin) {
     errors.wMin = "Min weight is required";
+  } else if (input.wMin <= 0) {
+    errors.wMin = "Min weight should be greater than zero";
   } else if (!input.wMax) {
     errors.wMax = "Max weight is required";
+  } else if (input.wMax <= 0) {
+    errors.wMax = "Max weight should be greater than zero";
   } else if (parseInt(input.wMin) >= parseInt(input.wMax)) {
     errors.wMax = "Max weight must be greater than Min";
   } else if (!input.hMin) {
     errors.hMin = "Min height is required";
+  } else if (input.hMin <= 0) {
+    errors.hMin = "Min height should be greater than zero";
   } else if (!input.hMax) {
     errors.hMax = "Max height is required";
+  } else if (input.hMax <= 0) {
+    errors.hMin = "Min height should be greater than zero";
   } else if (parseInt(input.hMin) >= parseInt(input.hMax)) {
-    errors.wMax = "Max height must be greater than Min";
+    errors.hMax = "Max height must be greater than Min";
   } else if (!input.life_spanMin) {
     errors.life_spanMin = "Min life span is required";
+  } else if (input.life_spanMin <= 0) {
+    errors.life_spanMin = "Min life span should be greater than zero";
   } else if (!input.life_spanMax) {
-    errors.life_spanMin = "Max life span is required";
+    errors.life_spanMax = "Max life span is required";
+  } else if (input.life_spanMax <= 0) {
+    errors.life_spanMax = "Min life span should be greater than zero";
   } else if (parseInt(input.life_spanMin) >= parseInt(input.life_spanMax)) {
-    errors.wMax = "Max life span must be greater than Min";
+    errors.life_spanMax = "Max life span must be greater than Min";
   } else if (!input.image) {
     errors.image = "Please insert internet image URL";
-  } else if (
-    !/(http(s?):)([/|.|\w|\s|-])*\.(?:jpg|gif|png)/.test(input.image)
-  ) {
+  } else if (!/(http(s?):)([/|.|\w|\s|-])*\.(?:jpg|gif|png)/.test(input.image)) {
     errors.image = "Please insert a valid image URL";
-  }
-
+  } 
   return errors;
 }
 
@@ -84,7 +93,7 @@ export default function CreateDogs() {
   }
 
   function handleSubmit(e) {
-    if (errors.name !== undefined) {
+    if (errors !== undefined) {
       document.getElementById("NoSubmit");
       return alert("Please complete the fields with valid data");
     }
