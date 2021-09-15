@@ -35,7 +35,7 @@ export function filterByTemp(payload) {
   return {
     type: "FILTER_BY_TEMP",
     payload,
-  }
+  };
 }
 
 export function getBreedName(name) {

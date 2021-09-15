@@ -30,7 +30,7 @@ export default function Detail(props){
                     <h3> Temperaments: {!myDog[0].createdDb? myDog[0].temperament + ' ' : myDog[0].temperaments.map(ob => ob.name + (' '))} </h3>
                     <hr  className={styles.hr}/>
                     <Link to="/home">
-                        <button className={styles.btn}>Go back</button>
+                        <button className={styles.btn}>Go home</button>
                     </Link>
                 </div> : 
                 <img src={Loading} alt="loading gift not found" className={styles.loading} />

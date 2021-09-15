@@ -8,7 +8,6 @@ import styles from "./DogForm.module.css";
 
 function validate(input) {
   let errors = {};
-  console.log(errors);
   if (!input.name) {
     errors.name = "Name is required";
   } else if (!input.wMin) {
