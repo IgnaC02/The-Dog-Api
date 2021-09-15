@@ -1,7 +1,7 @@
 import React from "react";
 import styles from "./Card.module.css";
 
-export default function Card({ name, image, temperament, weight }) {
+export default function Card({ name, image, temperament, weight, height }) {
   return (
     <div className={styles.container}>
       <img className={styles.img} src={image} alt="Img not found" />
@@ -18,6 +18,7 @@ export default function Card({ name, image, temperament, weight }) {
         })(temperament)}
       </h3>
       <h3 className={styles.wei}>{weight}</h3>
+      <h3 className={styles.wei}>{height}</h3>
     </div>
   );
 }

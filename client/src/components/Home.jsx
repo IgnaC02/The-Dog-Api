@@ -115,6 +115,7 @@ export default function Home() {
                   image={ob.image}
                   temperament={!ob.createdDb? ob.temperament + ' ' : ob.temperaments}
                   weight={ob.weight + " kg"}
+                  height={ob.height + " Cm"}
                 />
               </Link>
             </div>
