@@ -6,7 +6,7 @@
 
 ## About
 
-Is a SPA that allows the user to visualize dog breeds from an external API, also filter and sort them by different features such as weight, height, life span.
+Is a responsive design SPA that allows the user to visualize dog breeds from an external API, also filter and sort them by different features such as weight, height, life span.
 Users can also create their own breeds by filling a controlled form. The created breed will be saved on a database, and also will be shown on the page with the other breeds.
 It was made for the Individual Henry Project
 ## Tech
