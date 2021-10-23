@@ -69,12 +69,13 @@ export default function Home() {
       <div className={styles.filtersContainer}>
         <SearchBar />
         <Link to="/dog" className={styles.link}>Create a new dog breed</Link>
-        <div>
+        <div className={styles.inputs}>
           <button
             onClick={(e) => {
               handleClick(e);
             }}
             className={styles.remove}
+            
           >
             Remove all filters
           </button>

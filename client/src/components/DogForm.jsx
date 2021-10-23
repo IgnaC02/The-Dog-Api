@@ -42,9 +42,11 @@ function validate(input) {
     errors.life_spanMax = "Max life span must be greater than Min";
   } else if (!input.image) {
     errors.image = "Please insert internet image URL";
-  } else if (!/(http(s?):)([/|.|\w|\s|-])*\.(?:jpg|gif|png)/.test(input.image)) {
+  } else if (
+    !/(http(s?):)([/|.|\w|\s|-])*\.(?:jpg|gif|png)/.test(input.image)
+  ) {
     errors.image = "Please insert a valid image URL";
-  } 
+  }
   return errors;
 }
 
@@ -88,8 +90,8 @@ export default function CreateDogs() {
   function handleDelete(e) {
     setInput({
       ...input,
-      temperament: input.temperament.filter(ob => ob !== e)
-    })
+      temperament: input.temperament.filter((ob) => ob !== e),
+    });
   }
 
   function handleSubmit(e) {
@@ -136,7 +138,7 @@ export default function CreateDogs() {
           className={styles.form}
         >
           {/* ----------- NAME ----------- */}
-          <div>
+          <div className={styles.contN}>
             {/* <label>Name:</label> */}
             <input
               type="text"
@@ -149,7 +151,7 @@ export default function CreateDogs() {
             {errors.name && <p className={styles.nameP}>{errors.name}</p>}
           </div>
           {/* ----------- WEIGTH ----------- */}
-          <div>
+          <div className={styles.contW}>
             {/* <label>Weight:</label> */}
             <input
               type="number"
@@ -171,7 +173,7 @@ export default function CreateDogs() {
             {errors.wMax && <p className={styles.wMaxP}>{errors.wMax}</p>}
           </div>
           {/* ----------- HEIGHT ----------- */}
-          <div>
+          <div className={styles.contH}>
             {/* <label>Height:</label> */}
             <input
               type="number"
@@ -193,7 +195,7 @@ export default function CreateDogs() {
             {errors.hMax && <p className={styles.hMaxP}>{errors.hMax}</p>}
           </div>
           {/* ----------- LIFE_SPAN ----------- */}
-          <div>
+          <div className={styles.contL}>
             {/* <label>Life span:</label> */}
             <input
               type="number"
@@ -218,7 +220,7 @@ export default function CreateDogs() {
               <p className={styles.life_spanMaxP}>{errors.life_spanMax}</p>
             )}
           </div>
-          <div>
+          <div className={styles.contI}>
             {/* <label>Image:</label> */}
             <input
               type="text"
@@ -230,7 +232,7 @@ export default function CreateDogs() {
             />
             {errors.image && <p className={styles.imageP}>{errors.image}</p>}
           </div>
-          <div>
+          <div className={styles.contT}>
             <select
               onChange={(e) => handleSelect(e)}
               value={input.temperament[input.temperament.length - 1]}
@@ -252,7 +254,22 @@ export default function CreateDogs() {
               ]}
             </div>
             <div className={styles.delete}>
-              {[input.temperament.map(ob => <div className={styles.options} ><p key={ob.id} className={styles.temperamentt}> {temperaments.find((t) => t.id === ob)?.name}</p> <button onClick={() => handleDelete(ob)} className={styles.btnX}>X</button></div>)]}
+              {[
+                input.temperament.map((ob) => (
+                  <div className={styles.options}>
+                    <p key={ob.id} className={styles.temperamentt}>
+                      {" "}
+                      {temperaments.find((t) => t.id === ob)?.name}
+                    </p>{" "}
+                    <button
+                      onClick={() => handleDelete(ob)}
+                      className={styles.btnX}
+                    >
+                      X
+                    </button>
+                  </div>
+                )),
+              ]}
             </div>
           </div>
           <div className={styles.btns}>
@@ -261,8 +278,9 @@ export default function CreateDogs() {
             </button>
           </div>
         </form>
-
-        <img className={styles.img} src={doge} alt="Landing img not found" />
+        <div className={styles.contImg}>
+          <img className={styles.img} src={doge} alt="Landing img not found" />
+        </div>
       </div>
       <Link to="/home" className={styles.btn_container}>
         <button className={styles.back_btn}> Go home</button>

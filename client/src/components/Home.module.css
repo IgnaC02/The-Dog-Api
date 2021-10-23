@@ -166,3 +166,114 @@
   background: #707070;
   border-radius: 9px;
 }
+
+@media (min-width: 320px) {
+  ::-webkit-scrollbar {
+    width: 0px;
+  }
+  .filtersContainer {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+  .inputs {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+  .remove,
+  .selectA_Z,
+  .selectWei,
+  .selectTemp,
+  .selectFilter {
+    width: 90%;
+    display: flex;
+    flex-direction: column;
+    margin-left: 0;
+    margin-right: 0;
+    justify-content: center;
+    align-items: center;
+  }
+  .containerCards {
+    display: grid;
+    grid-template-columns: 100%;
+  }
+}
+
+@media (min-width: 320px) {
+  ::-webkit-scrollbar {
+    width: 0px;
+  }
+  .inputs {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+  .remove,
+  .selectA_Z,
+  .selectWei,
+  .selectTemp,
+  .selectFilter {
+    width: 90%;
+    max-width: 480px;
+    display: flex;
+    flex-direction: column;
+    margin-left: 0;
+    margin-right: 0;
+    justify-content: center;
+    align-items: center;
+  }
+  .containerCards {
+    display: grid;
+    grid-template-columns: 100%;
+  }
+}
+
+@media (min-width: 780px) {
+  ::-webkit-scrollbar {
+    width: 7px;
+  }
+  .containerCards {
+    display: grid;
+    grid-template-columns: 50% 50%;
+  }
+}
+
+@media (min-width: 1155px) {
+  .filtersContainer {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    justify-content: center;
+    align-items: center;
+  }
+  .inputs {
+    max-width: 1155px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: center;
+  }
+  .remove,
+  .selectA_Z,
+  .selectWei,
+  .selectTemp,
+  .selectFilter {
+    margin-left: 20px;
+  }
+  .remove:first-child {
+    margin-left: 0;
+  }
+}
+
+@media (min-width: 1365px) {
+  .containerCards {
+    display: grid;
+    grid-template-columns: 25% 25% 25% 25%;
+  }
+}
