@@ -13,8 +13,8 @@ Users can also create thier own breeds by filling a controlled form. The created
 
 ### For this App I used:
 Adobe Xd to make the design 
-React, Redux and pure CSS for the Front
-Express and Sequelize - Postgres for the Back
+#### ⚛️React, Redux and pure CSS for the Front
+#### 🛠Express and Sequelize - Postgres for the Back
 
 ## How to use it
  After cloning the repo on your computer follow the steps:
