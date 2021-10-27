@@ -1,9 +1,5 @@
 # The Dog Api
 
-<p align="left">
-  <img height="200" src="./dog.png" />
-</p>
-
 ## About
 
 Is a responsive design SPA that allows the user to visualize dog breeds from an external API, also filter and sort them by different features such as weight, height, life span.
